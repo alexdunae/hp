@@ -2,7 +2,17 @@
    Check out CSS-in-JS for fancier scoping options
 */
 
+.stats-boxes {
+    max-width: 90vw;
+    margin: 2rem auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    column-gap: 1rem;
+  row-gap: 1em;
+}
 .stats-box {
+    /* margin:  */
     border: 1px solid beige;
     padding: 1rem 2rem;
 }
@@ -12,6 +22,7 @@
 }
 
 .stats-measurements {
+    font-size: 1rem;
     list-style: none;
     margin: 1rem 0 0;
     padding: 0;

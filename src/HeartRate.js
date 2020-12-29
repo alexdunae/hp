@@ -3,6 +3,16 @@ import './HeartRate.css';
 const UNITS = 'bpm'
 const DISPLAY_COUNT = 10;
 
+function recentAverage(measurements) {
+    const count = Math.min(3, measurements.length);
+    if (count < 0) return '?'
+    const sum = measurements.slice(0, count).reduce(function (acc, x) {
+        // console.log('acc', a, b)
+        return acc + x.value
+    }, 0);
+    console.log(count, sum, measurements.slice(0, count))
+    return `${(sum / count).toFixed(1)} ${UNITS}`;
+}
 
 // this would likely be exported from a shared file
 function formatTimestamp(timestamp) {
@@ -41,6 +51,9 @@ function HeartRate(props) {
     return (
         <div className="stats-box stats-heartrate">
             <h3>Heart Rate</h3>
+            <p className='stats-summary'>
+                Recent average: {recentAverage(measurements)}
+            </p>
             <ul className='stats-measurements'>
         {dataPoints}
         </ul>

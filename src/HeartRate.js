@@ -28,7 +28,8 @@ function HeartRate(props) {
     }
 
     // sort oldest to newest
-    const dataPoints = measurements.sort((a, b) => b.timestamp - a.timestamp).slice(0, DISPLAY_COUNT).map(measurement => {
+    // ack, sort is not immutable...
+    const dataPoints = measurements.slice(0, DISPLAY_COUNT).map(measurement => {
         return (
         <li className="stats-measurement" key={measurement.timestamp}>
             <span className="stats-timestamp">{formatTimestamp(measurement.timestamp)}</span>

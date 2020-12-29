@@ -7,7 +7,7 @@ const HEART_RATE_MEASUREMENTS = [
   {timestamp: Date.parse('2020-02-01'), value: 55},
   {timestamp: Date.parse('2020-03-01'), value: 50},
   {timestamp: Date.parse('2020-04-01'), value: 70}
-]
+].sort((a, b) => b.timestamp - a.timestamp)
 
 function App() {
   return (

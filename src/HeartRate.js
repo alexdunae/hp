@@ -1,3 +1,5 @@
+import './HeartRate.css';
+
 const UNITS = 'bpm'
 const DISPLAY_COUNT = 10;
 
@@ -19,7 +21,7 @@ function HeartRate(props) {
 
     if (measurements.length < 1) {
         return (
-            <div className="stats stats-heartrate stats-empty">
+            <div className="stats-box stats-heartrate stats-empty">
                 <p>No heart rate data to report.</p>
             </div>
         )
@@ -36,7 +38,7 @@ function HeartRate(props) {
     })
 
     return (
-        <div className="stats stats-heartrate">
+        <div className="stats-box stats-heartrate">
             <h3>Heart Rate</h3>
             <ul className='stats-measurements'>
         {dataPoints}

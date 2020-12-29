@@ -1,0 +1,32 @@
+/* This CSS is globally scoped and only in its own file for our own developer experience
+   Check out CSS-in-JS for fancier scoping options
+*/
+
+.stats-box {
+    border: 1px solid beige;
+    padding: 1rem 2rem;
+}
+
+.stats-box h3 {
+    margin: 0 0 1rem;
+}
+
+.stats-measurements {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    text-align: left;
+}
+
+/* TODO: display: table? */
+.stats-timestamp {
+    display: inline-block;
+    min-width: 10rem;
+}
+
+
+.stats-value {
+    display: inline-block;
+    min-width: 5rem;
+    text-align: right;
+}

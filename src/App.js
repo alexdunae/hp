@@ -1,4 +1,5 @@
 import './App.css';
+import React, { useState } from 'react'
 import StatsBox from './StatsBox'
 
 // Note: passing in integers, not dates, to simplify comparison
@@ -21,12 +22,28 @@ const STEP_MEASUREMENTS = [
 
 
 function App() {
+  // const showSummary = true;
+  const [showSummary, setShowSummary] = useState(true);
+
+  const summaryToggleLabel = showSummary ? 'Show detail' : 'Show summary';
+
+  // this is a React.SyntheticEvent - a wrapper that tidies up all the differences between different browsers
+  // you can use it as if it was a regular mouse event
+  // you can access event.nativeEvent if you really need to
+  // see https://reactjs.org/docs/events.html for more
+  const toggleSummary = (event) => {
+    event.preventDefault();
+    setShowSummary(!showSummary);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
+
+      <button onClick={toggleSummary} className='button-link'>{summaryToggleLabel}</button>
         <div className="stats-boxes">
-        <StatsBox measurements={HEART_RATE_MEASUREMENTS} units='bpm' label='Heart Rate ❤️'/>
-        <StatsBox measurements={STEP_MEASUREMENTS} units='steps' label='Steps 🏃'/>
+          <StatsBox measurements={HEART_RATE_MEASUREMENTS} units='bpm' label='Heart Rate ❤️' showSummary={showSummary}/>
+          <StatsBox measurements={STEP_MEASUREMENTS} units='steps' label='Steps 🏃' showSummary={showSummary} />
         </div>
       </header>
     </div>

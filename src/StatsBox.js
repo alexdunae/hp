@@ -29,6 +29,7 @@ function StatsBox(props) {
     const measurements = props.measurements || [];
     const label = props.label;
     const units = props.units;
+    const showSummary = !!props.showSummary;
 
     if (measurements.length < 1) {
         return (
@@ -38,8 +39,18 @@ function StatsBox(props) {
         )
     }
 
-    // sort oldest to newest
-    // ack, sort is not immutable...
+    // there are lots of ways we could have handled the summary vs detail state
+    // in order to DRY-up the code; we chose this for simplicity
+    if (showSummary) {
+        return (
+            <div className="stats-box">
+                <h3>{label}</h3>
+                <p className='stats-summary'>
+                    Recent average: {recentAverage(measurements, units)}
+                </p>
+            </div>
+        )
+    }
     const dataPoints = measurements.slice(0, DISPLAY_COUNT).map(measurement => {
         return (
         <li className="stats-measurement" key={measurement.timestamp}>
@@ -52,12 +63,9 @@ function StatsBox(props) {
     return (
         <div className="stats-box">
             <h3>{label}</h3>
-            <p className='stats-summary'>
-                Recent average: {recentAverage(measurements, units)}
-            </p>
             <ul className='stats-measurements'>
-        {dataPoints}
-        </ul>
+                {dataPoints}
+            </ul>
         </div>
     )
 }

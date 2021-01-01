@@ -1,21 +1,21 @@
 import './App.css';
 import React, { useState } from 'react'
 import StatsBox from './StatsBox'
-
+import sortByNewest from './sortByNewest';
 // Note: passing in integers, not dates, to simplify comparison
-const HEART_RATE_MEASUREMENTS = [
+const HEART_RATE_MEASUREMENTS = sortByNewest([
   {timestamp: Date.parse('2020-01-01'), value: 60},
   {timestamp: Date.parse('2020-02-01'), value: 55},
   {timestamp: Date.parse('2020-03-01'), value: 50},
   {timestamp: Date.parse('2020-04-01'), value: 70}
-].sort((a, b) => b.timestamp - a.timestamp)
+]);
 
-const STEP_MEASUREMENTS = [
+const STEP_MEASUREMENTS = sortByNewest([
   {timestamp: Date.parse('2020-01-01'), value: 6000},
   {timestamp: Date.parse('2020-02-01'), value: 5000},
   {timestamp: Date.parse('2020-03-01'), value: 10050},
   {timestamp: Date.parse('2020-04-01'), value: 12345}
-].sort((a, b) => b.timestamp - a.timestamp)
+])
 
 
 

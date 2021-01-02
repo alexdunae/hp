@@ -1,22 +1,16 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import StatsBox from './StatsBox';
+import VitalsSummary from './VitalsSummary';
 import sortByNewest from './sortByNewest';
 import Activities from './Activities';
-// Note: passing in integers, not dates, to simplify comparison
-const HEART_RATE_MEASUREMENTS = sortByNewest([
-  { timestamp: Date.parse('2020-01-01'), value: 60 },
-  { timestamp: Date.parse('2020-02-01'), value: 55 },
-  { timestamp: Date.parse('2020-03-01'), value: 50 },
-  { timestamp: Date.parse('2020-04-01'), value: 70 },
-]);
 
-const STEP_MEASUREMENTS = sortByNewest([
-  { timestamp: Date.parse('2020-01-01'), value: 6000 },
-  { timestamp: Date.parse('2020-02-01'), value: 5000 },
-  { timestamp: Date.parse('2020-03-01'), value: 10050 },
-  { timestamp: Date.parse('2020-04-01'), value: 12345 },
+// Note: passing in integers, not dates, to simplify comparison
+const VITALS = sortByNewest([
+  { timestamp: Date.parse('2020-01-01'), resting_heart: 60, steps: 6000 },
+  { timestamp: Date.parse('2020-02-01'), resting_heart: 55, steps: 5000 },
+  { timestamp: Date.parse('2020-03-01'), resting_heart: 50, steps: 9000 },
+  { timestamp: Date.parse('2020-04-01'), resting_heart: 70, steps: 10000 },
 ]);
 
 // NB: added IDs to work as render KEYs
@@ -76,15 +70,17 @@ function App(props) {
         <button onClick={toggleSummary} className="button-link">
           {summaryToggleLabel}
         </button>
-        <div className="stats-boxes">
-          <StatsBox
-            measurements={HEART_RATE_MEASUREMENTS}
+        <div className="vitals-boxes">
+          <VitalsSummary
+            measurements={VITALS}
+            dataKey="resting_heart"
             units="bpm"
             label="Heart Rate ❤️"
             showSummary={showSummary}
           />
-          <StatsBox
-            measurements={STEP_MEASUREMENTS}
+          <VitalsSummary
+            measurements={VITALS}
+            dataKey="steps"
             units="steps"
             label="Steps 🏃"
             showSummary={showSummary}

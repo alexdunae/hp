@@ -36,6 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.activity-box {
+  margin-bottom: 3rem;
+}
+
 .activity-list {
   display: table;
 }

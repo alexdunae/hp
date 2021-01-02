@@ -87,7 +87,7 @@ function App(props) {
             measurements={vitals}
             dataKey="resting_heartrate"
             units="bpm"
-            label="Heart Rate ❤️"
+            label="Resting ❤️"
             showSummary={showSummary}
           />
           <VitalsSummary
@@ -95,6 +95,14 @@ function App(props) {
             dataKey="steps"
             units="steps"
             label="Steps 🏃"
+            showSummary={showSummary}
+          />
+
+          <VitalsSummary
+            measurements={vitals}
+            dataKey="active_energy"
+            units="kcal"
+            label="Activity 🍲"
             showSummary={showSummary}
           />
         </div>

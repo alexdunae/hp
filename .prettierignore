@@ -1,5 +1,4 @@
 node_modules
 .git
 build
-strava-importer/data
-strava-importer/*.json
+*.json

@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 
 const ACTIVITY_TYPES = ['Run', 'Swim', 'Yoga', 'WeightTraining'];
 
@@ -6,18 +7,16 @@ const ACTIVITY_TYPES = ['Run', 'Swim', 'Yoga', 'WeightTraining'];
 // NB: filteredActivityType is a prop here, not state
 // NB: filteredActivityType matches name of parent's state variable for convenience but does not have to
 // NB: we pass all UNFILTERED activities here
+// NB: there are multiple ways to trigger callbacks, we could even have a function in here to do some formatting etc...
 function FilterControls({ activities, filteredActivityType, setFilteredActivityType }) {
-  let anySelected = false;
+  let noneSelected = true;
   const options = ACTIVITY_TYPES.map((activityType) => {
     const isSelected = activityType === filteredActivityType;
-    if (isSelected) anySelected = true;
-    const klass = isSelected
-      ? 'button-link activity-filter activity-filter-selected'
-      : 'button-link activity-filter';
+    if (isSelected) noneSelected = false;
     return (
       <button
         key={activityType}
-        className={klass}
+        className={cx('bitton-link', 'activity-filter', { 'activity-filter-selected': isSelected })}
         onClick={() => setFilteredActivityType(activityType)}
       >
         {activityType}
@@ -25,12 +24,12 @@ function FilterControls({ activities, filteredActivityType, setFilteredActivityT
     );
   });
 
-  const klass = anySelected
-    ? 'button-link activity-filter'
-    : 'button-link activity-filter activity-filter-selected';
-
   options.unshift(
-    <button key="all" className={klass} onClick={() => setFilteredActivityType(undefined)}>
+    <button
+      key="all"
+      className={cx('bitton-link', 'activity-filter', { 'activity-filter-selected': noneSelected })}
+      onClick={() => setFilteredActivityType(undefined)}
+    >
       All
     </button>,
   );

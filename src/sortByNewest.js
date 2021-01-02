@@ -1,3 +1,3 @@
 export default function sortByNewest(data) {
-    return data.sort((a, b) => b.timestamp - a.timestamp)
+  return data.sort((a, b) => b.timestamp - a.timestamp);
 }

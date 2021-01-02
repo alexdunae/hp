@@ -1,5 +1,6 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import StatsBox from './StatsBox';
 import sortByNewest from './sortByNewest';
 import Activities from './Activities';
@@ -19,49 +20,28 @@ const STEP_MEASUREMENTS = sortByNewest([
 ]);
 
 // NB: added IDs to work as render KEYs
-const ACTIVITIES = sortByNewest([
-  {
-    id: 1,
-    timestamp: Date.parse('2020-01-01'),
-    name: 'Lunch 5km',
-    type: 'Run',
-    distance: 5000,
-    duration: 25 * 60,
-    average_heart_rate: 150,
-    average_speed: 2.982,
-  },
-  {
-    id: 2,
-    timestamp: Date.parse('2020-02-01'),
-    name: 'Leg Day',
-    type: 'WeightTraining',
-    duration: 30 * 60,
-    average_heart_rate: 120,
-  },
-  {
-    id: 3,
-    timestamp: Date.parse('2020-03-01'),
-    name: 'Morning Flow',
-    type: 'Yoga',
-    duration: 40 * 60,
-    average_heart_rate: 100.7,
-  },
-  {
-    id: 4,
-    timestamp: Date.parse('2020-04-01'),
-    name: 'Track Intervals',
-    type: 'Run',
-    distance: 4000,
-    duration: 25 * 60,
-    average_heart_rate: 170,
-    average_speed: 3.982,
-    run_type: 'workout',
-  },
-]);
+// const ACTIVITIES = sortByNewest([]);
 
-function App() {
-  // const showSummary = true;
+function App(props) {
+  const { activitiesEndpoint } = props;
+  // NB: the naming conventions of `useState`
   const [showSummary, setShowSummary] = useState(true);
+
+  // could also be 'ready', 'error', maybe some other options -- or a boolean, but this is a decent place for handling errors
+  const [loadingStatus, setLoadingStatus] = useState('loading');
+
+  // use the same datatype as we're expecting
+  const [activities, setActivities] = useState([]);
+
+  useEffect(() => {
+    // setTimeout(() => {
+    axios.get(activitiesEndpoint).then((response) => {
+      // NB: skipping error handling
+      setActivities(response.data);
+      setLoadingStatus('ready');
+    });
+    // }, 2000);
+  }, [activitiesEndpoint, setActivities, setLoadingStatus]);
 
   const summaryToggleLabel = showSummary ? 'Show detail' : 'Show summary';
 
@@ -73,6 +53,22 @@ function App() {
     event.preventDefault();
     setShowSummary(!showSummary);
   };
+
+  if (loadingStatus === 'loading') {
+    return (
+      <div className="App">
+        <header className="App-header">Re-combobulating the jigawatts...</header>
+      </div>
+    );
+  }
+
+  if (loadingStatus === 'error') {
+    return (
+      <div className="App">
+        <header className="App-header">Mission failed! We'll get 'em next time...</header>
+      </div>
+    );
+  }
 
   return (
     <div className="App">
@@ -95,7 +91,7 @@ function App() {
           />
         </div>
 
-        <Activities activities={ACTIVITIES} />
+        <Activities activities={activities} />
       </header>
     </div>
   );

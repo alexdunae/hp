@@ -7,10 +7,8 @@ function recentAverage(measurements, units) {
   const count = Math.min(3, measurements.length);
   if (count < 0) return '?';
   const sum = measurements.slice(0, count).reduce(function (acc, x) {
-    // console.log('acc', a, b)
     return acc + x.value;
   }, 0);
-  console.log(count, sum, measurements.slice(0, count));
   return `${(sum / count).toFixed(1)} ${units}`;
 }
 

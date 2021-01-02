@@ -9,15 +9,15 @@
     grid-template-columns: repeat(2, 1fr);
 
     column-gap: 1rem;
-  row-gap: 1em;
+      row-gap: 1em;
 }
-.stats-box {
+.stats-box, .activity-box {
     /* margin:  */
     border: 1px solid beige;
     padding: 1rem 2rem;
 }
 
-.stats-box h3 {
+.stats-box h3, .activity-box h3 {
     margin: 0 0 1rem;
 }
 

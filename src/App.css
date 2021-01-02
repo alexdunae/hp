@@ -36,3 +36,31 @@
     transform: rotate(360deg);
   }
 }
+.activity-list {
+  display: table;
+}
+
+.activity-entry {
+  display: table-row;
+}
+
+.activity-datum {
+  display: table-cell;
+  font-size: 1.2rem;
+  padding: 0.2rem 0.5rem;
+  text-align: left;
+}
+
+.activity-timestamp {
+  width: 10rem;
+}
+
+
+/* return (
+  /* <div className='activity-entry'>
+      <span className="activity-timestamp">{formatTimestamp(props.timestamp)}</span>
+      <h4 className='activity-title'>{props.name}</h4>
+      <p className='activity-type'>Run (?workout?)</p>
+      <p className='activity-duration'>{duration}</p>
+  </div>
+  ) */

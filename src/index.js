@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App activitiesEndpoint="/strava-activities.json" />
+    <App activitiesEndpoint="/strava-activities.json" vitalsEndpoint="/vitals.json" />
   </React.StrictMode>,
   document.getElementById('root'),
 );

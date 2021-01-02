@@ -13,7 +13,7 @@ function recentAverage(measurements, dataKey, units) {
 
     return acc + x[dataKey];
   }, 0);
-  return `${(sum / count).toFixed(1)} ${units}`;
+  return `${(sum / count).toFixed(0)} ${units}`;
 }
 
 function VitalsSummary(props) {
@@ -37,9 +37,7 @@ function VitalsSummary(props) {
     return (
       <div className="vitals-box">
         <h3>{label}</h3>
-        <p className="vitals-summary">
-          Recent average: {recentAverage(measurements, dataKey, units)}
-        </p>
+        <p className="vitals-summary">≈ {recentAverage(measurements, dataKey, units)}</p>
       </div>
     );
   }

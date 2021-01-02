@@ -1,4 +1,5 @@
 import './StatsBox.css';
+import formatTimestamp from './lib/formatTimestamp';
 
 const DISPLAY_COUNT = 10;
 
@@ -13,17 +14,6 @@ function recentAverage(measurements, units) {
     return `${(sum / count).toFixed(1)} ${units}`;
 }
 
-// this would likely be exported from a shared file
-function formatTimestamp(timestamp) {
-    // some error checking, or Typescript
-    const date = new Date(timestamp)
-    const display = date.toLocaleDateString()
-    const attr = date.toISOString()
-
-    // NB React attribute case
-    return <time dateTime={attr}>{display}</time>
-
-}
 
 function StatsBox(props) {
     const measurements = props.measurements || [];
